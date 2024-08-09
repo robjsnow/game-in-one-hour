@@ -1,5 +1,7 @@
 # Cyberpunk Memory Game
 
+You can play the game directly on the web here: [Cyberpunk Memory Game](https://robjsnow.github.io/game-in-one-hour/)
+
 ## About the Project
 
 Welcome to a simple yet electrifying twist on the classic card game of memory! This project is a cyberpunk-themed version of the timeless memory game, where players match pairs of cyberpunk characters. The entire game was built in just one hour, with a self-imposed challenge to create a fully functional game without using any pre-built engines or starting assets.
