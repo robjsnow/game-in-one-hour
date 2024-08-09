@@ -4,51 +4,66 @@ document.addEventListener('DOMContentLoaded', () => {
     const startContainer = document.getElementById('start-container');
     const gameContainer = document.getElementById('game-container');
     const gameBoard = document.getElementById('game-board');
-    
-    startButton.addEventListener('click', () => {
-        // Play the music
-        gameMusic.play();
+    const loadingScreen = document.getElementById('loading-screen');
 
-        // Hide the start button and show the game board
+    // Ensure only the loading screen is visible initially
+    startContainer.style.display = 'none';
+    gameContainer.style.display = 'none';
+
+    // Preload the images
+    const cardImages = [
+        'images/image1.png',
+        'images/image2.png',
+        'images/image3.png',
+        'images/image4.png',
+        'images/image5.png',
+        'images/image6.png',
+        'images/image7.png',
+        'images/image8.png'
+    ];
+    let cardsArray = [...cardImages, ...cardImages];
+    let imagesLoaded = 0;
+
+    cardsArray.forEach((image) => {
+        const img = new Image();
+        img.src = image;
+        img.onload = () => {
+            imagesLoaded++;
+            if (imagesLoaded === cardsArray.length) {
+                // Intentionally delay the fade-out of the loading screen
+                setTimeout(() => {
+                    loadingScreen.style.opacity = '0';
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        startContainer.style.display = 'flex';
+                    }, 1000); // 1 second fade out
+                }, 2000); // 2-second delay after loading is complete for aesthetics
+            }
+        };
+    });
+
+    startButton.addEventListener('click', () => {
+        gameMusic.play();
         startContainer.style.display = 'none';
         gameContainer.style.display = 'block';
-
         startGame();
     });
 
     function startGame() {
-        const cardImages = [
-            'images/image1.png', 
-            'images/image2.png', 
-            'images/image3.png', 
-            'images/image4.png', 
-            'images/image5.png', 
-            'images/image6.png', 
-            'images/image7.png',
-            'images/image8.png'
-        ]; // Paths to the front images
-        let cardsArray = [...cardImages, ...cardImages]; // Duplicate the array for pairs
         let firstCard = null;
         let secondCard = null;
         let lockBoard = false;
 
-        // Shuffle the cards
         cardsArray.sort(() => 0.5 - Math.random());
 
-        // Create the cards and add them to the board
         cardsArray.forEach(image => {
             const card = document.createElement('div');
             card.classList.add('card');
             card.innerHTML = `
                 <div class="card-inner">
-                    <div class="card-front"></div>
+                    <div class="card-front" style="background-image: url(${image});"></div>
                     <div class="card-back"></div>
                 </div>`;
-            
-            // Set the front image using JavaScript
-            const cardFront = card.querySelector('.card-front');
-            cardFront.style.backgroundImage = `url(${image})`;
-            
             card.addEventListener('click', flipCard);
             gameBoard.appendChild(card);
         });
@@ -69,10 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         function checkForMatch() {
-            if (firstCard.querySelector('.card-front').style.backgroundImage === 
+            if (firstCard.querySelector('.card-front').style.backgroundImage ===
                 secondCard.querySelector('.card-front').style.backgroundImage) {
                 disableCards();
-                checkForWin(); // Check if all cards have been matched
+                checkForWin();
             } else {
                 unflipCards();
             }
@@ -104,9 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (allFlipped) {
                 setTimeout(() => {
-                    alert('Congratulations! You have matched all the cards!');
-                    resetGame();
-                }, 500);
+              resetGame();
+                }, 2200);
             }
         }
 
@@ -114,13 +128,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const allCards = document.querySelectorAll('.card');
             allCards.forEach(card => {
                 card.classList.remove('flipped');
-                card.addEventListener('click', flipCard); // Re-enable clicking
+                card.addEventListener('click', flipCard);
             });
 
-            // Reshuffle the cards
             cardsArray.sort(() => 0.5 - Math.random());
 
-            // Reassign images to the cards
             allCards.forEach((card, index) => {
                 const cardFront = card.querySelector('.card-front');
                 cardFront.style.backgroundImage = `url(${cardsArray[index]})`;

@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="start-container">
+    <div id="loading-screen">
+        <div class="neon-text">Loading...</div>
+    </div>
+    
+    <div id="start-container" style="display:none;">
         <button id="start-button">Start Game</button>
         <audio id="game-music" src="audio/music.mp3"></audio> 
     </div>
+    
     <div id="game-container" style="display:none;">
         <div id="game-board"></div>
     </div>
