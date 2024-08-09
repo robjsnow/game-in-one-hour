@@ -8,7 +8,7 @@ Welcome to a simple yet electrifying twist on the classic card game of memory! T
 
 ## The Challenge
 
-The goal was straightforward but ambitious: to design, code, and test a complete memory game within one hour. From gathering assets to styling the game and writing all the code, every element of this project was created from scratch. No pre-existing assets, code snippets, or scripts were allowed at the start, making this a true test of speed, creativity, and problem-solving under pressure.
+The goal was straightforward but ambitious: to design, code, and test a complete memory game within one hour, as well as make it compatible for mobile devices. From gathering assets to styling the game and writing all the code, every element of this project was created from scratch. No pre-existing assets, code snippets, or scripts were allowed at the start, making this a true test of speed, creativity, and problem-solving under pressure.
 
 ## Gameplay
 
